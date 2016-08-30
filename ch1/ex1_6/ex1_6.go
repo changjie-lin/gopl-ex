@@ -2,6 +2,8 @@
 // See page 13.
 
 // Lissajous generates GIF animations of random Lissajous figures.
+package main
+
 import (
 	"image"
 	"image/color"
@@ -22,12 +24,15 @@ import (
 
 //!+main
 
-var palette = []color.Color{color.Black, color.RGBA{0x00, 0x80, 0x00, 0xFF}}
-
-const (
-	whiteIndex = 0 // first color in palette
-	blackIndex = 1 // next color in palette
-)
+var palette = []color.Color{color.Black,
+	color.RGBA{0xFF, 0, 0, 0xFF},       // red
+	color.RGBA{0xFF, 0xA5, 0, 0xFF},    // orange
+	color.RGBA{0xFF, 0xFF, 0, 0xFF},    // yellow
+	color.RGBA{0, 0xFF, 0, 0xFF},       // green
+	color.RGBA{0, 0, 0xFF, 0xFF},       // blue
+	color.RGBA{0x4B, 0, 0x82, 0xFF},    // indigo
+	color.RGBA{0xEE, 0x82, 0xEE, 0xFF}, // violet
+}
 
 func main() {
 	//!-main
@@ -64,11 +69,11 @@ func lissajous(out io.Writer) {
 	for i := 0; i < nframes; i++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
+		index := uint8(rand.Intn(len(palette)))
 		for t := 0.0; t < cycles*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
-			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5),
-				blackIndex)
+			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), index)
 		}
 		phase += 0.1
 		anim.Delay = append(anim.Delay, delay)
