@@ -31,7 +31,7 @@ var palette = []color.Color{color.Black,
 	color.RGBA{0, 0xFF, 0, 0xFF},       // green
 	color.RGBA{0, 0, 0xFF, 0xFF},       // blue
 	color.RGBA{0x4B, 0, 0x82, 0xFF},    // indigo
-	color.RGBA{0xEE, 0x82, 0xEE, 0xFF}, // violet
+	color.RGBA{0xEE, 0x82, 0xEE, 0xFF} // violet
 }
 
 func main() {
